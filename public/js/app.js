@@ -47435,29 +47435,54 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     data: function data() {
         return {
-            items: [1, 2, 22, 2, 2, 2, 2, 234, 234, 234, 23, 423, 4, 23, 4],
-            foo: 'ttt',
-            following: []
+            following: [],
+            following_data: []
         };
     },
-    created: function created() {
-        var _this = this;
 
-        axios.get('api/following').then(function (response) {
-            return _this.following = response.data;
-        });
-        console.log(this.following);
-    },
+    methods: {
+        getUserData: function getUserData() {
+            var _this = this;
 
-    computed: {
-        authenticatedUser: function authenticatedUser() {
-            console.log(this.$auth.getAuthenticatedUser());
-            return this.$auth.getAuthenticatedUser();
+            var nex_cur = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : null;
+
+            axios.get('api/following', { params: { 'next_cursor': nex_cur } }).then(function (response) {
+                var that = _this;
+                response.data['ids'].map(function (item) {
+                    that.following.push(item);
+                });
+                console.log(response.data);
+                if (response.data['next_cursor']) {
+                    console.log(response.data['next_cursor']);
+                    setTimeout(_this.getUserData(response.data['next_cursor']), 2000);
+                }
+            });
         }
+    },
+    created: function created() {
+        this.getUserData();
     }
 });
 
@@ -47470,16 +47495,62 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c(
-    "ul",
-    { staticClass: "list-group" },
-    _vm._l(_vm.items, function(item) {
-      return _c("li", { staticClass: "list-group-item" }, [
-        _vm._v(_vm._s(item))
+    "div",
+    { staticClass: "row" },
+    _vm._l(_vm.following_data, function(user) {
+      return _c("div", { staticClass: "col-md-3 padding" }, [
+        _c("div", { staticClass: "card" }, [
+          _c("img", {
+            staticClass: "card-img-top",
+            attrs: { src: user["profile_image_url_https"] }
+          }),
+          _vm._v(" "),
+          _c("div", { staticClass: "card-body" }, [
+            _c("h5", { staticClass: "card-title" }, [
+              _vm._v(_vm._s(user["name"]))
+            ]),
+            _vm._v(" "),
+            _c("p", { staticClass: "card-text" }, [
+              _vm._v(_vm._s(user["screen_name"]))
+            ])
+          ]),
+          _vm._v(" "),
+          _c("ul", { staticClass: "list-group list-group-flush" }, [
+            _c("li", { staticClass: "list-group-item" }, [
+              _vm._v("Bio: " + _vm._s(user["description"]))
+            ]),
+            _vm._v(" "),
+            _c("li", { staticClass: "list-group-item" }, [
+              _vm._v("Dapibus ac facilisis in")
+            ]),
+            _vm._v(" "),
+            _c("li", { staticClass: "list-group-item" }, [
+              _vm._v("Vestibulum at eros")
+            ])
+          ]),
+          _vm._v(" "),
+          _vm._m(0, true)
+        ])
       ])
     })
   )
 }
-var staticRenderFns = []
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "card-body" }, [
+      _c("a", { staticClass: "card-link", attrs: { href: "#" } }, [
+        _vm._v("Twitter")
+      ]),
+      _vm._v(" "),
+      _c("a", { staticClass: "card-link", attrs: { href: "#" } }, [
+        _vm._v("Another link")
+      ])
+    ])
+  }
+]
 render._withStripped = true
 module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {

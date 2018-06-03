@@ -13,4 +13,6 @@ use Illuminate\Http\Request;
 |
 */
 
-Route::get('following', 'Api\FollowingContoller@following');
+Route::group(['namespace'=>'Api'],function (){
+    Route::get('following', 'FollowingController@following');
+});

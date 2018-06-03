@@ -44,9 +44,9 @@ class DownloadUsers extends Command
 
     private function download()
     {
-        $counter = 1 ;
+        $counter = 1;
         foreach (TwitterUsers::get() as $user) {
-            $this->info($counter.': user : http://twitter.com/' . $user->username);
+            $this->info($counter . ': user : http://twitter.com/' . $user->username);
             $this->DownloadUser($user, null, 1, 1);
             $this->updateUserLastDownload($user);
             $counter++;
@@ -56,16 +56,18 @@ class DownloadUsers extends Command
 
     private function DownloadUser($user, $max_id = null, $counter = 1, $page = 1)
     {
+        $path = $this->CreateDirectoryForUser($user->username);
+        $this->comment($path);
         if ($page > 1) {
             $this->comment('page : ' . $page . ' ---> http://twitter.com/' . $user->username);
         }
         try {
-            $call_data_array = ['screen_name' => $user->username, 'count' => 50];
+            $call_data_array = ['screen_name' => $user->username, 'count' => 20];
             if ($max_id) {
                 $call_data_array = array_add($call_data_array, 'max_id', $max_id);
             }
             $tweets = \Twitter::getUserTimeline($call_data_array);
-            $path = $this->CreateDirectoryForUser($user->username);
+
 
             if (count($tweets) > 0) {
                 $last_tweet_id = last($tweets)->id;
@@ -85,7 +87,7 @@ class DownloadUsers extends Command
 
                                 if (!file_exists($path . "/" . $filename)) {
                                     try {
-                                        $this->line($counter . '- ' . $path.'/'.$filename);
+                                        $this->line($tweet->id . " " . $counter . '- ' . $path . '/' . $filename);
                                         copy($url, $path . "/" . $filename);
                                         $counter++;
                                     } catch (\Exception $exception) {
@@ -95,6 +97,7 @@ class DownloadUsers extends Command
                             }
                         }
                     }
+                    unset($tweets);
                     $page++;
                     $this->DownloadUser($user, $last_tweet_id, $counter, $page);
                 }

@@ -4,7 +4,7 @@
  * Date: 5/23/18 - 10:22 PM
  */
 
-namespace App\Http\Controllers\api;
+namespace App\Http\Controllers\Api;
 
 
 
