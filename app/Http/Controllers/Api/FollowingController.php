@@ -17,7 +17,6 @@ class FollowingController extends ApiController
         if ($next_cursor) {
             $call_data['cursor'] = $next_cursor;
         }
-//        $following = Twitter::getFriends($call_data);
         $following = \Twitter::getFriendsIds($call_data);
         return response()->json($following);
     }
