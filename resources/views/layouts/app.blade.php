@@ -43,6 +43,7 @@
                         @guest
                             <li><a class="nav-link" href="{{ url('login/twitter') }}">{{ __('Login') }}</a></li>
                         @else
+                            <li class="nav-link disabled"><a class=''>Followers : {{auth()->user()->followers}}</a></li>
                             <li class="nav-item dropdown">
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                                     {{ Auth::user()->name }} <span class="caret"></span>

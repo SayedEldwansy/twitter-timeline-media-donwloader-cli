@@ -18,8 +18,7 @@ Route::get('/', 'HomeController@index')->name('home');
 Route::get('login/twitter', 'Auth\LoginController@redirectToProvider');
 Route::get('login/twitter/callback', 'Auth\LoginController@handleProviderCallback');
 Route::get('limit',function(){
-    dd(\Twitter::getFriendsIds());
 
     $limit =\Twitter::getAppRateLimit();
-    dd($limit);
+    dd($limit->resources);
 });

@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Auth;
 use App\Events\UserLogin;
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
-use App\User;
+use App\Models\User;
 
 class LoginController extends Controller
 {

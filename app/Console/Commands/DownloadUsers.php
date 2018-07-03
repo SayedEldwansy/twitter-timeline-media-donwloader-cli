@@ -4,7 +4,7 @@ namespace App\Console\Commands;
 
 use Http\Client\Common\Exception\HttpClientNotFoundException;
 use Illuminate\Console\Command;
-use App\TwitterUsers;
+use App\Models\TwitterUsers;
 
 class DownloadUsers extends Command
 {

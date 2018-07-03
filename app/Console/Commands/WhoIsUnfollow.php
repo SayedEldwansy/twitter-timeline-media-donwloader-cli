@@ -2,10 +2,10 @@
 
 namespace App\Console\Commands;
 
-use App\DaleyUserFollwers;
-use App\User;
+use App\Models\DaleyUserFollwers;
+use App\Models\MessageQueues;
+use App\Models\User;
 use Illuminate\Console\Command;
-use function PHPSTORM_META\type;
 use Twitter;
 
 class WhoIsUnfollow extends Command
@@ -34,6 +34,20 @@ class WhoIsUnfollow extends Command
                 'user_id' => $user->id,
                 'followers' => $followers,
             ]);
+            $last2rows = $user->DaleyFollowers()->latest()->limit(2)->pluck('followers');
+            $diff = array_diff($last2rows[0], $last2rows[1]);
+            if (count($diff) > 0) {
+                $whoIsUnfollow = [];
+                $peoples = Twitter::getUsersLookup(['user_id' => $diff]);
+                foreach ($peoples as $people) {
+                    $whoIsUnfollow[] = $people->screen_name;
+                }
+                MessageQueues::create([
+                    'user_id' => $user->id,
+                    'message' => 'This people unfollowed you recently : @' . implode(' ,@', $whoIsUnfollow),
+                ]);
+            }
+
         }
     }
 

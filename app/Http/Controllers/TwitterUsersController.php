@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\TwitterUsers;
+use App\Models\TwitterUsers;
 use Illuminate\Http\Request;
 
 class TwitterUsersController extends Controller
