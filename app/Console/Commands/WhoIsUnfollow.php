@@ -35,19 +35,20 @@ class WhoIsUnfollow extends Command
                 'followers' => $followers,
             ]);
             $last2rows = $user->DaleyFollowers()->latest()->limit(2)->pluck('followers');
-            $diff = array_diff($last2rows[1], $last2rows[0]);
-            if (count($diff) > 0) {
-                $whoIsUnfollow = [];
-                $peoples = Twitter::getUsersLookup(['user_id' => $diff]);
-                foreach ($peoples as $people) {
-                    $whoIsUnfollow[] = $people->screen_name;
+            if (count($last2rows) >= 2) {
+                $diff = array_diff($last2rows[1], $last2rows[0]);
+                if (count($diff) > 0) {
+                    $whoIsUnfollow = [];
+                    $peoples = Twitter::getUsersLookup(['user_id' => $diff]);
+                    foreach ($peoples as $people) {
+                        $whoIsUnfollow[] = $people->screen_name;
+                    }
+                    MessageQueues::create([
+                        'user_id' => $user->id,
+                        'message' => 'This people unfollowed you recently : @' . implode(' ,@', $whoIsUnfollow),
+                    ]);
                 }
-                MessageQueues::create([
-                    'user_id' => $user->id,
-                    'message' => 'This people unfollowed you recently : @' . implode(' ,@', $whoIsUnfollow),
-                ]);
             }
-
         }
     }
 
