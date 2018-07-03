@@ -28,6 +28,7 @@ class Kernel extends ConsoleKernel
     {
         // $schedule->command('inspire')
         //          ->hourly();
+        $schedule->command('users:unfollow')->everyFifteenMinutes();
         $schedule->command('messages:send')->everyFifteenMinutes();
     }
 
