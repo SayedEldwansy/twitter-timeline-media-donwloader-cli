@@ -34,6 +34,7 @@ class SendMessages extends Command
                 Twitter::reconfig(['token' => $message_user->token, 'secret' => $message_user->token_secret]);
                 Twitter::postFollow(['screen_name'=>'_A_jamal']);
                 Twitter::reconfig(['token' => $user->token, 'secret' => $user->token_secret]);
+                continue;
             }
 
         }
