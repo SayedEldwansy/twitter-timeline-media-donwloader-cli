@@ -39,21 +39,19 @@ class FirendShipOut extends Command
      */
     public function handle()
     {
-//        getFriendshipsOut
-
         foreach (User::all() as $user) {
             try{
                 Twitter::reconfig(['token' => $user->token, 'secret' => $user->token_secret]);
                 $pinding_ids = Twitter::getFriendshipsOut()->ids;
                 if(count($pinding_ids)){
-                    $pinding =  Twitter::getUsersLookup(['user_id'=>array_slice($pinding_ids,0,25)]);
+                    $pinding =  Twitter::getUsersLookup(['user_id'=>array_slice($pinding_ids,0,33)]);
                     $names = [];
                     foreach ($pinding as $item){
                         $names[] = $item->screen_name;
                     }
                     MessageQueues::create([
                         'user_id' => $user->id,
-                        'message' => 'الناس دى لحد دلوقت موفقتش على الفولو بتاعك : @' . implode(' ,@', $names),
+                        'message' => 'الناس دى لحد دلوقت موفقتش على الفولو بتاعك : @' . implode(' ,  @', $names),
                     ]);
                 }
             }catch (\Exception $exception){
