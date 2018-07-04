@@ -56,7 +56,7 @@ class FirendShipOut extends Command
                 }
             }catch (\Exception $exception){
                 \Log::info($user->username);
-                \Log::info($exception->getMessage());
+                \Log::info($exception->getMessage(),$exception->getLine(),$exception->getFile());
             }
 
         }

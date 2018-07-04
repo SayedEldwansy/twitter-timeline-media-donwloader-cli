@@ -60,7 +60,7 @@ class WhoIsUnfollow extends Command
                     }
                 }
             } catch (\Exception $exception) {
-                Log::info($exception->getMessage(), $exception->getLine(), $exception->getFile());
+                \Log::info($exception->getMessage(), $exception->getLine(), $exception->getFile());
             }
 
         }

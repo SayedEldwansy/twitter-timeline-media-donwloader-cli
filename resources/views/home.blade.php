@@ -13,17 +13,18 @@
                                 {{ session('status') }}
                             </div>
                         @endif
-                        {{--<list-of-flowers></list-of-flowers>--}}
+
                         I'll keep trace Who is unfollow you just wait i'll DM with frequently from My account
 
 
-                        <a href="https://twitter.com/__201_?ref_src=twsrc%5Etfw" class="twitter-follow-button"
-                           data-show-count="false">Follow @__201_</a>
+                        <a href="https://twitter.com/_A_jamal?ref_src=twsrc%5Etfw" class="twitter-follow-button"
+                           data-show-count="false">Follow @_A_jamal</a>
 
 
                     </div>
                 </div>
             </div>
         </div>
+        {{--<list-of-flowers></list-of-flowers>--}}
     </div>
 @endsection

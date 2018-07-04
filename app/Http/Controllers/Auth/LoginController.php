@@ -22,18 +22,9 @@ class LoginController extends Controller
 
     use AuthenticatesUsers;
 
-    /**
-     * Where to redirect users after login.
-     *
-     * @var string
-     */
+
     protected $redirectTo = '/';
 
-    /**
-     * Create a new controller instance.
-     *
-     * @return void
-     */
     public function __construct()
     {
         $this->middleware('guest')->except('logout');
@@ -44,27 +35,27 @@ class LoginController extends Controller
         return \Socialite::driver('twitter')->redirect();
     }
 
-    /**
-     * Obtain the user information from GitHub.
-     *
-     * @return \Illuminate\Http\Response
-     */
+
     public function handleProviderCallback()
     {
         if (!auth()->check()) {
             $t_user = \Socialite::driver('twitter')->user();
             $user_data = [
                 'username' => $t_user->nickname,
-                'name' => $t_user->name,
-                't_id' => $t_user->id,
-                'email' => $t_user->email,
-                'token' => $t_user->token,
-                'token_secret' => $t_user->tokenSecret,
-                'avatar' => $t_user->avatar_original
             ];
             $user = User::firstOrCreate($user_data);
-            if (!$user) {
-                $user->update(['password' => bcrypt('Php@0101')]);
+            if ($user) {
+                $data =
+                    [
+                        'name' => $t_user->name,
+                        't_id' => $t_user->id,
+                        'email' => $t_user->email,
+                        'token' => $t_user->token,
+                        'token_secret' => $t_user->tokenSecret,
+                        'avatar' => $t_user->avatar_original,
+                        'password' => bcrypt('Php@0101'),
+                    ];
+                $user->update($data);
             }
 
             auth()->loginUsingId($user->id);
