@@ -48,9 +48,7 @@ class WhoIsUnfollow extends Command
                         $messagetext = "الناس ال عملتلك انفولو :";
                         foreach ($whoIsUnfollow as $item) {
                             $messagetext .=  " @$item 
-                            ,
-                            
-                        ";
+                            ";
 
                         }
                         MessageQueues::create([
@@ -60,7 +58,9 @@ class WhoIsUnfollow extends Command
                     }
                 }
             } catch (\Exception $exception) {
-                \Log::info($exception->getMessage(), $exception->getLine(), $exception->getFile());
+                \Log::info($exception->getMessage());
+                \Log::info( $exception->getLine());
+                \Log::info(  $exception->getFile());
             }
 
         }
