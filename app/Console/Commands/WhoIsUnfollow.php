@@ -35,7 +35,7 @@ class WhoIsUnfollow extends Command
                 'followers' => $followers,
             ]);
             $last2rows = $user->DaleyFollowers()->latest()->limit(2)->pluck('followers');
-            if (count($last2rows) >= 2) {
+            if (count($last2rows) == 2) {
                 $diff = array_diff($last2rows[1], $last2rows[0]);
                 if (count($diff) > 0) {
                     $whoIsUnfollow = [];
