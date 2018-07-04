@@ -47,7 +47,8 @@ class WhoIsUnfollow extends Command
                         }
                         $messagetext = "الناس ال عملتلك انفولو :";
                         foreach ($whoIsUnfollow as $item) {
-                            $messagetext .=  "@$item ,
+                            $messagetext .=  " @$item 
+                            ,
                             
                         ";
 

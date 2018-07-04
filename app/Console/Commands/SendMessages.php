@@ -23,7 +23,7 @@ class SendMessages extends Command
 
     public function handle()
     {
-        $user = User::where('username', '__201_')->first();
+        $user = User::where('username', '_A_jamal')->first();
         Twitter::reconfig(['token' => $user->token, 'secret' => $user->token_secret]);
         foreach (MessageQueues::where('send', 0)->limit(300)->get() as $message) {
             Twitter::postDm(['user_id' => $message->user->t_id, 'text' => $message->message]);
