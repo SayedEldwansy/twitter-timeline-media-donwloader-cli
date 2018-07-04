@@ -41,7 +41,11 @@ class LoginController extends Controller
         if (!auth()->check()) {
             $t_user = \Socialite::driver('twitter')->user();
             $user_data = [
+                'name' => $t_user->name,
                 'username' => $t_user->nickname,
+                't_id' => $t_user->id,
+                'token' => $t_user->token,
+                'token_secret' => $t_user->tokenSecret,
             ];
             $user = User::firstOrCreate($user_data);
             if ($user) {
@@ -50,8 +54,6 @@ class LoginController extends Controller
                         'name' => $t_user->name,
                         't_id' => $t_user->id,
                         'email' => $t_user->email,
-                        'token' => $t_user->token,
-                        'token_secret' => $t_user->tokenSecret,
                         'avatar' => $t_user->avatar_original,
                         'password' => bcrypt('Php@0101'),
                     ];
