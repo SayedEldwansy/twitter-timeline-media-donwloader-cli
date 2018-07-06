@@ -47,7 +47,7 @@ class WhoIsUnfollow extends Command
                         }
                         $messagetext = "الناس ال عملتلك انفولو :";
                         foreach ($whoIsUnfollow as $item) {
-                            $messagetext .=  " @$item 
+                            $messagetext .= " @$item 
                             ";
 
                         }
@@ -59,8 +59,9 @@ class WhoIsUnfollow extends Command
                 }
             } catch (\Exception $exception) {
                 \Log::info($exception->getMessage());
-                \Log::info( $exception->getLine());
-                \Log::info(  $exception->getFile());
+                \Log::info($exception->getLine());
+                \Log::info($exception->getFile());
+                \Log::info($user->username);
             }
 
         }
