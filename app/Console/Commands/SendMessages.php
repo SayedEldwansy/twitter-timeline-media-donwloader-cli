@@ -29,7 +29,7 @@ class SendMessages extends Command
             try {
                 $msg = $message->message . "
                 
-                ".url('/');
+                See More : ".url('/');
 
                 Twitter::postDm(['user_id' => $message->user->t_id, 'text' => $msg]);
                 $message->update(['send' => 1]);
