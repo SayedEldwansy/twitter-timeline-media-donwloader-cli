@@ -26,13 +26,17 @@ class SendMessages extends Command
         $user = User::where('username', '_A_jamal')->first();
         Twitter::reconfig(['token' => $user->token, 'secret' => $user->token_secret]);
         foreach (MessageQueues::where('send', 0)->limit(300)->get() as $message) {
-            try{
-                Twitter::postDm(['user_id' => $message->user->t_id, 'text' => $message->message]);
-                $message->update(['send'=>1]);
-            }catch (\Exception $exception){
+            try {
+                $msg = $message->message . "
+                
+                ".url('/');
+
+                Twitter::postDm(['user_id' => $message->user->t_id, 'text' => $msg]);
+                $message->update(['send' => 1]);
+            } catch (\Exception $exception) {
                 $message_user = $message->user;
                 Twitter::reconfig(['token' => $message_user->token, 'secret' => $message_user->token_secret]);
-                Twitter::postFollow(['screen_name'=>'_A_jamal']);
+                Twitter::postFollow(['screen_name' => '_A_jamal']);
                 Twitter::reconfig(['token' => $user->token, 'secret' => $user->token_secret]);
                 continue;
             }
