@@ -3,7 +3,7 @@
 @section('content')
     <div class="container">
         <div class="row justify-content-center">
-            <div class="col-md-8">
+            <div class="col-md-10">
                 <div class="card">
                     <div class="card-header">Note :</div>
 
@@ -26,20 +26,6 @@
             </div>
         </div>
         <br>
-        <div class="row justify-content-center">
-            <div class="col-md-8">
-                <div class="card">
-                    <div class="card-header">Who is not follow you back :</div>
-
-                    <div class="card-body">
-
-
-                        <list-of-flowers></list-of-flowers>
-
-
-                    </div>
-                </div>
-            </div>
-        </div>
+        <list-of-not-follow-back></list-of-not-follow-back>
     </div>
 @endsection

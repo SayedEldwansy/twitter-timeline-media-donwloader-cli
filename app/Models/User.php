@@ -17,7 +17,7 @@ class User extends Authenticatable
     protected $fillable = [
         'username', 'phone', 'name', 't_id', 'email', 'password', 'token', 'token_secret', 'avatar'
     ];
-    protected $appends = ['followers','friends'];
+    protected $appends = ['followers', 'friends'];
     /**
      * The attributes that should be hidden for arrays.
      *
@@ -51,5 +51,10 @@ class User extends Authenticatable
     public function DaleyFriends()
     {
         return $this->hasMany(DaleyUserFriends::class);
+    }
+
+    public function NotFollowBack()
+    {
+        return $this->hasMany(NotFollowBack::class, 'user_id');
     }
 }
