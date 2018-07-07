@@ -78,6 +78,7 @@
                 axios.post('api/un-follow',{screen_name:screen_name,id:id}).then(response =>{
                     if (response){
                         $('#'+screen_name).hide();
+                        this.list_count = this.list_count - 1
                     }
                 });
             }
