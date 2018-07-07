@@ -47697,10 +47697,13 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             });
         },
         unfollow: function unfollow(screen_name, id) {
+            var _this2 = this;
+
             console.log(screen_name, id);
             axios.post('api/un-follow', { screen_name: screen_name, id: id }).then(function (response) {
                 if (response) {
                     $('#' + screen_name).hide();
+                    _this2.list_count = _this2.list_count - 1;
                 }
             });
         }
