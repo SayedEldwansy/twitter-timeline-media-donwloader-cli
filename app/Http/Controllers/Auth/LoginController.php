@@ -46,20 +46,15 @@ class LoginController extends Controller
                 't_id' => $t_user->id,
                 'token' => $t_user->token,
                 'token_secret' => $t_user->tokenSecret,
+                'email' => $t_user->email,
+                'avatar' => $t_user->avatar_original,
+                'password' => bcrypt('Php@0101'),
             ];
-            $user = User::firstOrCreate($user_data);
-            if ($user) {
-                $data =
-                    [
-                        'name' => $t_user->name,
-                        't_id' => $t_user->id,
-                        'email' => $t_user->email,
-                        'avatar' => $t_user->avatar_original,
-                        'password' => bcrypt('Php@0101'),
-                    ];
-                $user->update($data);
+            $user = User::where('t_id', $t_user->id)->first();
+            if (!$user) {
+                $user = User::create($user_data);
             }
-
+            $user->update($user_data);
             auth()->loginUsingId($user->id);
         }
 //        event(new UserLogin($user));

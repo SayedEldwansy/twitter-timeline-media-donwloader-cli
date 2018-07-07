@@ -61,9 +61,22 @@
                         {{--</div>--}}
                         {{--</div>--}}
                         {{--</form>--}}
-                        <div class="text-center">
-                            <a href="{{url('login/twitter')}}" class="btn btn-primary">Login With Twitter</a>
+
+                        <div class="row justify-content-center">
+                            <div class="col-md-6">
+                                <div class="list-group">
+                                    <a class="list-group-item list-group-item-action active">Who we can help you :</a>
+                                    <a class="list-group-item list-group-item-action">Dm you with who id unfollowed you</a>
+                                    <a class="list-group-item list-group-item-action">Dm you with pending follow requests</a>
+                                    <a class="list-group-item list-group-item-action">Who's not followed you back</a>
+                                </div>
+                            </div>
                         </div>
+                        <br>
+                        <div class="row  justify-content-center">
+                            <a href="{{url('login/twitter')}}" class="btn btn-primary">Login with twitter <i class="fa fa-twitter"></i></a>
+                        </div>
+
                     </div>
                 </div>
             </div>
