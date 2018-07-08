@@ -47821,7 +47821,7 @@ var render = function() {
             })
           ),
           _vm._v(" "),
-          _vm.list_count
+          _vm.list_count > 0
             ? _c("div", { staticClass: "row justify-content-center" }, [
                 _c(
                   "button",

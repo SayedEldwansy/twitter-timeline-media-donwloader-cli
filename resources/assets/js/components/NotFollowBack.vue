@@ -32,7 +32,7 @@
                             </div>
                         </div>
                     </div>
-                    <div v-if="list_count" class="row justify-content-center">
+                    <div v-if="list_count > 0" class="row justify-content-center">
                         <button @click="loadmore()" class="btn btn-primary ">Load more</button>
                     </div>
                 </div>
