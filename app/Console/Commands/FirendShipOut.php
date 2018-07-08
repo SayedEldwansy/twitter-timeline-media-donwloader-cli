@@ -51,8 +51,7 @@ class FirendShipOut extends Command
                     }
                     MessageQueues::create([
                         'user_id' => $user->id,
-                        'message' => 'الناس دى لحد دلوقت موفقتش على الفولو بتاعك : @' . implode('
-                        @', $names),
+                        'message' => 'pending requests : @' . implode(' , @', $names),
 
                     ]);
                 }
