@@ -47,9 +47,7 @@ class WhoIsUnfollow extends Command
                         }
                         $messagetext = "الناس ال عملتلك انفولو :";
                         foreach ($whoIsUnfollow as $item) {
-                            $messagetext .= " @$item 
-                            ";
-
+                            $messagetext .= "@$item , ";
                         }
                         MessageQueues::create([
                             'user_id' => $user->id,

@@ -9,31 +9,14 @@
                     <h3 v-if="list_count == 0 ">
                         This list will be ready soon <i class="fa fa-circle-o-notch fa-spin fa-2x"></i>
                     </h3>
-
-
-                    <!--<div class="col-md-4 padding" v-for="user in users_list">-->
-                    <!--<div class="card">-->
-                    <!--<img class="card-img-top" v-bind:src="user['profile_image_url_https']">-->
-                    <!--<div class="card-body">-->
-                    <!--<h5 class="card-title">{{user['name']}}</h5>-->
-                    <!--<p class="card-text">{{user['screen_name']}}</p>-->
-                    <!--</div>-->
-                    <!--<ul class="list-group list-group-flush">-->
-                    <!--<li class="list-group-item">Bio: {{user['description']}}</li>-->
-                    <!--<li class="list-group-item">Location : {{user['location']}}</li>-->
-                    <!--<li class="list-group-item">Followers : {{user['followers_count']}}</li>-->
-                    <!--<li class="list-group-item">Following : {{user['friends_count']}}</li>-->
-                    <!--</ul>-->
-                    <!--<div class="card-body">-->
-                    <!--<a href="#" class="card-link">UnFollow</a>-->
-                    <!--</div>-->
-                    <!--</div>-->
-                    <!--</div>-->
                     <div class="row">
                         <div v-for="user in users_list" class="card mb-3 mr-1"
-                             style="width: 18rem;height: 20rem" v-bind:id="user['screen_name']" >
-                            <div class="card-header"> @{{user['screen_name']}}
-                                <button @click="unfollow(user['screen_name'],user['id'])" class="btn btn-sm btn-danger float-right">Unfollow</button>
+                             style="width: 18rem;height: 20rem" v-bind:id="user['screen_name']">
+                            <div class="card-header">
+                                <a target="_blank" v-bind:href="'https://twitter.com/'+user['screen_name']">@{{user['screen_name']}} </a>
+                                <button @click="unfollow(user['screen_name'],user['id'])"
+                                        class="btn btn-sm btn-danger float-right">Unfollow
+                                </button>
                             </div>
                             <div class="card-body">
                                 <h5 class="card-title">
@@ -49,8 +32,9 @@
                             </div>
                         </div>
                     </div>
-
-
+                    <div v-if="list_count" class="row justify-content-center">
+                        <button @click="loadmore()" class="btn btn-primary ">Load more</button>
+                    </div>
                 </div>
             </div>
         </div>
@@ -61,26 +45,39 @@
     export default {
         data() {
             return {
+                page: 0,
                 list_count: 0,
                 users_list: []
             }
         },
         methods: {
-            getUserData(nex_cur = null) {
-                axios.get('api/not-follow-list', {params: {'next_cursor': nex_cur}}).then(response => {
+            getUserData() {
+                axios.get('api/not-follow-list', {params: {'page': this.page}}).then(response => {
                     this.list_count = response.data['list_count'];
-                    this.users_list = response.data['list_data'];
+                    var that = this;
+                    response.data['list_data'].map(function (item) {
+                        that.users_list.push(item);
+                    });
+                    if (this.page < 1){
+                        this.users_list.sort(function (a, b) {
+                            return a['followers_count'] - b['followers_count'];
+                        });
+                    }
                     console.log(response.data);
                 });
             },
-            unfollow(screen_name,id){
-                console.log(screen_name,id);
-                axios.post('api/un-follow',{screen_name:screen_name,id:id}).then(response =>{
-                    if (response){
-                        $('#'+screen_name).hide();
+            unfollow(screen_name, id) {
+                console.log(screen_name, id);
+                axios.post('api/un-follow', {screen_name: screen_name, id: id}).then(response => {
+                    if (response) {
+                        $('#' + screen_name).hide();
                         this.list_count = this.list_count - 1
                     }
                 });
+            },
+            loadmore() {
+                this.page++;
+                this.getUserData();
             }
         },
         created() {

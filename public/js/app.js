@@ -47659,26 +47659,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     data: function data() {
         return {
+            page: 0,
             list_count: 0,
             users_list: []
         };
@@ -47688,11 +47673,17 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         getUserData: function getUserData() {
             var _this = this;
 
-            var nex_cur = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : null;
-
-            axios.get('api/not-follow-list', { params: { 'next_cursor': nex_cur } }).then(function (response) {
+            axios.get('api/not-follow-list', { params: { 'page': this.page } }).then(function (response) {
                 _this.list_count = response.data['list_count'];
-                _this.users_list = response.data['list_data'];
+                var that = _this;
+                response.data['list_data'].map(function (item) {
+                    that.users_list.push(item);
+                });
+                if (_this.page < 1) {
+                    _this.users_list.sort(function (a, b) {
+                        return a['followers_count'] - b['followers_count'];
+                    });
+                }
                 console.log(response.data);
             });
         },
@@ -47706,6 +47697,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                     _this2.list_count = _this2.list_count - 1;
                 }
             });
+        },
+        loadmore: function loadmore() {
+            this.page++;
+            this.getUserData();
         }
     },
     created: function created() {
@@ -47753,11 +47748,17 @@ var render = function() {
                 },
                 [
                   _c("div", { staticClass: "card-header" }, [
-                    _vm._v(
-                      " @" +
-                        _vm._s(user["screen_name"]) +
-                        "\n                            "
+                    _c(
+                      "a",
+                      {
+                        attrs: {
+                          target: "_blank",
+                          href: "https://twitter.com/" + user["screen_name"]
+                        }
+                      },
+                      [_vm._v("@" + _vm._s(user["screen_name"]) + " ")]
                     ),
+                    _vm._v(" "),
                     _c(
                       "button",
                       {
@@ -47768,7 +47769,7 @@ var render = function() {
                           }
                         }
                       },
-                      [_vm._v("Unfollow")]
+                      [_vm._v("Unfollow\n                            ")]
                     )
                   ]),
                   _vm._v(" "),
@@ -47818,7 +47819,24 @@ var render = function() {
                 ]
               )
             })
-          )
+          ),
+          _vm._v(" "),
+          _vm.list_count
+            ? _c("div", { staticClass: "row justify-content-center" }, [
+                _c(
+                  "button",
+                  {
+                    staticClass: "btn btn-primary ",
+                    on: {
+                      click: function($event) {
+                        _vm.loadmore()
+                      }
+                    }
+                  },
+                  [_vm._v("Load more")]
+                )
+              ])
+            : _vm._e()
         ])
       ])
     ])

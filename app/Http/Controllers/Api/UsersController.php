@@ -11,17 +11,18 @@ class UsersController extends ApiController
     public function NotFollowBack(Request $request)
     {
         $user = auth()->user();
+        $page = $request->page;
+        $from = ($page > 0) ? $page + 100 : $page;
+        $to = $from + 100 ;
         Twitter::reconfig(['token' => $user->token, 'secret' => $user->token_secret]);
         $record = auth()->user()->NotFollowBack()->latest()->first();
         if ($record) {
             $people_list = [];
-            $limited_list = array_slice($record->not_follow_back, 0, 600);
-            $chunk = array_chunk($limited_list, 100);
-            foreach ($chunk as $item) {
-                $people = $this->getTwitterById($item);
-                foreach ($people as $person) {
-                    $people_list[] = $person;
-                }
+            $limited_list = array_slice($record->not_follow_back, $from, $to);
+//            dd($limited_list);
+            $people = $this->getTwitterById($limited_list);
+            foreach ($people as $person) {
+                $people_list[] = $person;
             }
             return [
                 "list_count" => count($record->not_follow_back),
@@ -56,6 +57,6 @@ class UsersController extends ApiController
         }
         $record->not_follow_back = $not_follow_back;
         $record->save();
-        return 1;
+        return $not_follow_back;
     }
 }
