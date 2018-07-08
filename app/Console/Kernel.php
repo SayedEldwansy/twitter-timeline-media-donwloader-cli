@@ -31,8 +31,8 @@ class Kernel extends ConsoleKernel
         // $schedule->command('inspire')
         //          ->hourly();
         $schedule->command('user:pending-follow')->dailyAt('23:30')->timezone('Africa/Cairo');
-        $schedule->command('users:unfollow')->daily();
-        $schedule->command('command:who-is-not-follow-back')->daily();
+        $schedule->command('users:unfollow')->hourly();
+        $schedule->command('command:who-is-not-follow-back')->hourly();
         $schedule->command('messages:send')->everyFifteenMinutes();
 
     }
