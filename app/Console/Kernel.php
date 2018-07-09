@@ -2,6 +2,8 @@
 
 namespace App\Console;
 
+use App\Console\Commands\CleanUp;
+use App\Console\Commands\SendMessages;
 use App\Console\Commands\WhoIsNotFollowBack;
 use App\Console\Commands\WhoIsUnfollow;
 use Illuminate\Console\Scheduling\Schedule;
@@ -18,6 +20,8 @@ class Kernel extends ConsoleKernel
         DownloadUsers::class,
         WhoIsUnfollow::class,
         WhoIsNotFollowBack::class,
+        SendMessages::class,
+        CleanUp::class,
     ];
 
     /**
@@ -31,9 +35,11 @@ class Kernel extends ConsoleKernel
         // $schedule->command('inspire')
         //          ->hourly();
         $schedule->command('user:pending-follow')->dailyAt('23:30')->timezone('Africa/Cairo');
+        $schedule->command('command:cleanup')->dailyAt('03:30')->timezone('Africa/Cairo');
         $schedule->command('users:unfollow')->hourly();
         $schedule->command('command:who-is-not-follow-back')->hourly();
         $schedule->command('messages:send')->everyFifteenMinutes();
+
 
     }
 
