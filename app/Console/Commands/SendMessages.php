@@ -28,7 +28,7 @@ class SendMessages extends Command
             Twitter::reconfig(['token' => $user->token, 'secret' => $user->token_secret]);
             foreach (MessageQueues::where('send', 0)->limit(300)->get() as $message) {
                 try {
-                    $msg = $message->message . "\n\r".
+                    $msg = $message->message . "\n\r"."\n\r".
                         "See More : ".url('/');
                     Twitter::postDm(['user_id' => $message->user->t_id, 'text' => $msg]);
                     $message->update(['send' => 1]);
