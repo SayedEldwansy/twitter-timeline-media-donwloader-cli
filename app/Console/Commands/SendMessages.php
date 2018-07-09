@@ -23,24 +23,31 @@ class SendMessages extends Command
 
     public function handle()
     {
-        $user = User::where('username', '_A_jamal')->first();
-        Twitter::reconfig(['token' => $user->token, 'secret' => $user->token_secret]);
-        foreach (MessageQueues::where('send', 0)->limit(300)->get() as $message) {
-            try {
-                $msg = $message->message . "\n\r".
-                    "See More : ".url('/');
+        try{
+            $user = User::where('username', '_A_jamal')->first();
+            Twitter::reconfig(['token' => $user->token, 'secret' => $user->token_secret]);
+            foreach (MessageQueues::where('send', 0)->limit(300)->get() as $message) {
+                try {
+                    $msg = $message->message . "\n\r".
+                        "See More : ".url('/');
+                    Twitter::postDm(['user_id' => $message->user->t_id, 'text' => $msg]);
+                    $message->update(['send' => 1]);
+                } catch (\Exception $exception) {
+                    $message_user = $message->user;
+                    Twitter::reconfig(['token' => $message_user->token, 'secret' => $message_user->token_secret]);
+                    Twitter::postFollow(['screen_name' => '_A_jamal']);
+                    Twitter::reconfig(['token' => $user->token, 'secret' => $user->token_secret]);
+                    continue;
+                }
 
-
-                Twitter::postDm(['user_id' => $message->user->t_id, 'text' => $msg]);
-                $message->update(['send' => 1]);
-            } catch (\Exception $exception) {
-                $message_user = $message->user;
-                Twitter::reconfig(['token' => $message_user->token, 'secret' => $message_user->token_secret]);
-                Twitter::postFollow(['screen_name' => '_A_jamal']);
-                Twitter::reconfig(['token' => $user->token, 'secret' => $user->token_secret]);
-                continue;
             }
-
+        }catch (\Exception $e){
+            \Log::info("sending message command ");
+            \Log::info($exception->getMessage());
+            \Log::info($exception->getLine());
+            \Log::info($exception->getFile());
+            \Log::info($user->username);
         }
+
     }
 }

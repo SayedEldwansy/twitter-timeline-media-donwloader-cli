@@ -38,6 +38,7 @@ class WhoIsNotFollowBack extends Command
                 $not_follow_back_row->not_follow_back = array_values($notFollowBack);
                 $not_follow_back_row->save();
             } catch (\Exception $exception) {
+                \Log::info("who-is-not-follow-back command");
                 \Log::info($exception->getMessage());
                 \Log::info($exception->getLine());
                 \Log::info($exception->getFile());

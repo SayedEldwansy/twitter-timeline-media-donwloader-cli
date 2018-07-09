@@ -56,6 +56,7 @@ class FirendShipOut extends Command
                     ]);
                 }
             }catch (\Exception $exception){
+                \Log::info(" pending-follow command ");
                 \Log::info($user->username);
                 \Log::info($exception->getMessage(),$exception->getLine(),$exception->getFile());
             }
