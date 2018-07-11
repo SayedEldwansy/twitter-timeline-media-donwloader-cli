@@ -13,7 +13,7 @@ return [
     |
     */
 
-    'name' => env('APP_NAME', 'Twitter Helper'),
+    'name' => env('APP_NAME', 'Blue Helper'),
 
     /*
     |--------------------------------------------------------------------------
@@ -172,7 +172,7 @@ return [
     | the aliases are "lazy" loaded so they don't hinder performance.
     |
     */
-
+    'editor' => 'phpstorm',
     'aliases' => [
 
         'App' => Illuminate\Support\Facades\App::class,
