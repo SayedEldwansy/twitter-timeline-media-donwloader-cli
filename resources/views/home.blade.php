@@ -17,8 +17,8 @@
                         I'll keep trace Who is unfollow you just wait i'll DM with frequently from My account
 
 
-                        <a href="https://twitter.com/_A_jamal?ref_src=twsrc%5Etfw" class="twitter-follow-button"
-                           data-show-count="false">Follow @_A_jamal</a>
+                        <a href="https://twitter.com/_Blue_Helper_?ref_src=twsrc%5Etfw" class="twitter-follow-button"
+                           data-show-count="false">Follow @_Blue_Helper_</a>
 
 
                     </div>
