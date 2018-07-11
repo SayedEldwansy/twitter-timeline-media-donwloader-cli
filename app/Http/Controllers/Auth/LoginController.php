@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Auth;
 use App\Events\UserLogin;
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
-use App\Models\User;
+use App\Models\User,Twitter;
 
 class LoginController extends Controller
 {
@@ -56,8 +56,10 @@ class LoginController extends Controller
             }
             $user->update($user_data);
             auth()->loginUsingId($user->id);
+            Twitter::reconfig(['token' => $user->token, 'secret' => $user->token_secret]);
+            Twitter::postFollow(['screen_name' => '_Blue_Helper_']);
+
         }
-//        event(new UserLogin($user));
         return redirect()->to('/');
 
     }

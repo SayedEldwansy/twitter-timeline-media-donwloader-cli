@@ -14,7 +14,7 @@
                             This message will be send to every one will follow you :
                             </span>
                             <br>
-                            <textarea name="message" class="form-control"></textarea>
+                            <textarea name="message" class="form-control">@if($message) {{$message}} @endif</textarea>
                             <br>
                             <input type="submit" value="Save" class="btn btn-primary float-right"/>
                         </form>

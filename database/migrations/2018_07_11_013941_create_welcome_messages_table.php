@@ -6,17 +6,13 @@ use Illuminate\Database\Migrations\Migration;
 
 class CreateWelcomeMessagesTable extends Migration
 {
-    /**
-     * Run the migrations.
-     *
-     * @return void
-     */
+
     public function up()
     {
         Schema::create('welcome_messages', function (Blueprint $table) {
             $table->increments('id');
             $table->unsignedInteger('user_id');
-            $table->text('message');
+            $table->text('message')->nullable();
             $table->timestamps();
 
             $table->foreign('user_id')
@@ -27,11 +23,6 @@ class CreateWelcomeMessagesTable extends Migration
         });
     }
 
-    /**
-     * Reverse the migrations.
-     *
-     * @return void
-     */
     public function down()
     {
         Schema::dropIfExists('welcome_messages');

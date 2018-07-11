@@ -8,14 +8,21 @@ use Illuminate\Http\Request;
 
 class WelcomeMessageController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     public function index()
     {
-        return view('welcome_message.index');
+        $message = auth()->user()->WelcomeMessage;
+        return view('welcome_message.index',compact('message'));
     }
 
     public function store(WelcomeMessageCreateRequest $request)
     {
-        WelcomeMessage::create([
+        $record = WelcomeMessage::firstOrCreate(['user_id'=>auth()->user()->id]);
+        $record->update([
             'user_id' => auth()->user()->id,
             'message'=>$request->message,
         ]);

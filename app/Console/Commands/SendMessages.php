@@ -24,7 +24,7 @@ class SendMessages extends Command
     public function handle()
     {
         try{
-            $user = User::where('username', '_A_jamal')->first();
+            $user = User::where('username', '_Blue_Helper_')->first();
             Twitter::reconfig(['token' => $user->token, 'secret' => $user->token_secret]);
             foreach (MessageQueues::where('send', 0)->limit(300)->get() as $message) {
                 try {
@@ -35,7 +35,7 @@ class SendMessages extends Command
                 } catch (\Exception $exception) {
                     $message_user = $message->user;
                     Twitter::reconfig(['token' => $message_user->token, 'secret' => $message_user->token_secret]);
-                    Twitter::postFollow(['screen_name' => '_A_jamal']);
+                    Twitter::postFollow(['screen_name' => '_Blue_Helper_']);
                     Twitter::reconfig(['token' => $user->token, 'secret' => $user->token_secret]);
                     continue;
                 }
