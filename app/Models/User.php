@@ -57,4 +57,9 @@ class User extends Authenticatable
     {
         return $this->hasMany(NotFollowBack::class, 'user_id');
     }
+
+    public function WelcomeMessage()
+    {
+        return $this->belongsTo(WelcomeMessage::class);
+    }
 }

@@ -65,7 +65,7 @@
                         <div class="row justify-content-center">
                             <div class="col-md-6">
                                 <div class="list-group">
-                                    <a class="list-group-item list-group-item-action active">Who we can help you :</a>
+                                    <a class="list-group-item list-group-item-action active">What i can help you with :</a>
                                     <a class="list-group-item list-group-item-action">Dm you with who id unfollowed you</a>
                                     <a class="list-group-item list-group-item-action">Dm you with pending follow requests</a>
                                     <a class="list-group-item list-group-item-action">Who's not followed you back</a>
