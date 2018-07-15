@@ -42,6 +42,8 @@
 </template>
 
 <script>
+    import Notifications from 'vue-notification'
+    Vue.use(Notifications);
     export default {
         data() {
             return {
@@ -71,13 +73,20 @@
                 axios.post('api/un-follow', {screen_name: screen_name, id: id}).then(response => {
                     if (response) {
                         $('#' + screen_name).hide();
-                        this.list_count = this.list_count - 1
+                        this.list_count = this.list_count - 1;
+                        this.$notify({
+                            group: 'notify',
+                            title: '',
+                            text: 'unfollow '+ screen_name +" success",
+                            type: 'success',
+                        });
                     }
                 });
             },
             loadmore() {
                 this.page++;
                 this.getUserData();
+
             }
         },
         created() {

@@ -21,7 +21,9 @@
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 </head>
 <body>
+
 <div id="app">
+
     <nav class="navbar navbar-expand-md navbar-light navbar-laravel">
         <div class="container">
             <a class="navbar-brand" href="{{ url('/') }}">
@@ -76,6 +78,7 @@
         @include('flash::message')
         @yield('content')
     </main>
+    <notifications group="notify" animation-type="velocity" position="top right" />
 </div>
 </body>
 </html>
