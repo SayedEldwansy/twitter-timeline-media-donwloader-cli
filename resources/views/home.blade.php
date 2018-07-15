@@ -26,6 +26,7 @@
             </div>
         </div>
         <br>
-        <list-of-not-follow-back></list-of-not-follow-back>
+        <twett-my-me></twett-my-me>
+
     </div>
 @endsection
