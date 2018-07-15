@@ -17,4 +17,5 @@ Route::group(['namespace'=>'Api'],function (){
     Route::get('following', 'FollowingController@following');
     Route::get('not-follow-list', 'UsersController@NotFollowBack');
     Route::post('un-follow','UsersController@unFollow');
+    Route::post('tweet-by-me','UsersController@tweetByMe');
 });

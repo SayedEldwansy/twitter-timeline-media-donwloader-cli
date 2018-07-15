@@ -49062,12 +49062,51 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
 Vue.use(__WEBPACK_IMPORTED_MODULE_0_vue_notification___default.a);
 /* harmony default export */ __webpack_exports__["default"] = ({
-    data: function data() {}
+    data: function data() {
+        return {
+            tweet_string: ""
+        };
+    },
+
+    methods: {
+        tweet: function tweet() {
+            var _this = this;
+
+            axios.post('api/tweet-by-me', { tweet_string: this.tweet_string }).then(function (response) {
+                _this.$notify({
+                    group: 'notify',
+                    title: '',
+                    text: "Done",
+                    type: 'success'
+                });
+            });
+        }
+    }
 });
 
 /***/ }),
@@ -49078,7 +49117,59 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div")
+  return _c("div", { staticClass: "row justify-content-center" }, [
+    _c("div", { staticClass: "col-md-10" }, [
+      _c("div", { staticClass: "card" }, [
+        _c("div", { staticClass: "card-header" }, [
+          _vm._v(" Tweet as anonymous\n            ")
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "card-body" }, [
+          _c("span", { staticClass: "text-justify" }, [
+            _vm._v(
+              "\n                        This tweet will will tweet with my account @_Blue_Helper_ :\n                "
+            )
+          ]),
+          _vm._v(" "),
+          _c("br"),
+          _vm._v(" "),
+          _c("textarea", {
+            directives: [
+              {
+                name: "model",
+                rawName: "v-model",
+                value: _vm.tweet_string,
+                expression: "tweet_string"
+              }
+            ],
+            staticClass: "form-control",
+            attrs: { name: "message" },
+            domProps: { value: _vm.tweet_string },
+            on: {
+              input: function($event) {
+                if ($event.target.composing) {
+                  return
+                }
+                _vm.tweet_string = $event.target.value
+              }
+            }
+          }),
+          _vm._v(" "),
+          _c("br"),
+          _vm._v(" "),
+          _c(
+            "button",
+            {
+              staticClass: "btn btn-primary float-right",
+              attrs: { disabled: _vm.tweet_string.length <= 0, type: "submit" },
+              on: { click: _vm.tweet }
+            },
+            [_vm._v("\n                    Tweet\n                ")]
+          )
+        ])
+      ])
+    ])
+  ])
 }
 var staticRenderFns = []
 render._withStripped = true
