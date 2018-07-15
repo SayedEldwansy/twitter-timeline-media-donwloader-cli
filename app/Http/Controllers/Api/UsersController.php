@@ -69,7 +69,8 @@ class UsersController extends ApiController
         ]);
         $user = User::where('username', '_Blue_Helper_')->first();
         Twitter::reconfig(['token' => $user->token, 'secret' => $user->token_secret]);
-        Twitter::postTweet(['status' => $request->tweet_string]);
+        $status = "anonymous tweet : \n\r".$request->tweet_string;
+        Twitter::postTweet(['status' => $status]);
         return response()->json([]);
     }
 }
