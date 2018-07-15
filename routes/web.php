@@ -20,6 +20,7 @@ Route::get('login/twitter/callback', 'Auth\LoginController@handleProviderCallbac
 Route::get('settings','SettingsController@index')->name('settings')->middleware('auth');
 Route::get('welcome-message','WelcomeMessageController@index');
 Route::post('welcome-message','WelcomeMessageController@store');
+Route::get('not-follow-back','NotFollowBackController@index');
 
 
 
