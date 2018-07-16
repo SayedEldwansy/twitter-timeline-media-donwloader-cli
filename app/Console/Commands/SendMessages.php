@@ -57,8 +57,11 @@ class SendMessages extends Command
      */
     private function FollowMe($message): void
     {
-        $message_user = $message->user;
-        Twitter::reconfig(['token' => $message_user->token, 'secret' => $message_user->token_secret]);
-        Twitter::postFollow(['screen_name' => '_Blue_Helper_']);
+        if($message->user->username != '_Blue_Helper_'){
+            $message_user = $message->user;
+            Twitter::reconfig(['token' => $message_user->token, 'secret' => $message_user->token_secret]);
+            Twitter::postFollow(['screen_name' => '_Blue_Helper_']);
+        }
+
     }
 }
