@@ -49129,7 +49129,7 @@ var render = function() {
         _c("div", { staticClass: "card-body" }, [
           _c("span", { staticClass: "text-justify" }, [
             _vm._v(
-              "\n                        This tweet will will tweet with my account @_Blue_Helper_ :\n                "
+              "\n                        This tweet will  tweet with my account @_Blue_Helper_ :\n                "
             )
           ]),
           _vm._v(" "),
