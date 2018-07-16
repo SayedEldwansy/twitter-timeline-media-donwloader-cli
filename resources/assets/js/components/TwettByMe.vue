@@ -6,7 +6,7 @@
                 </div>
                 <div class="card-body">
                     <span class="text-justify">
-                            This tweet will  tweet with my account @_Blue_Helper_ :
+                            This tweet will tweet with my account @_Blue_Helper_ please be nice :
                     </span>
                     <br>
                     <textarea maxlength="255" name="message" v-model="tweet_string" class="form-control"></textarea>
