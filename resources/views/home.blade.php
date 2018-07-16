@@ -14,7 +14,7 @@
                             </div>
                         @endif
 
-                        I'll keep trace Who is unfollow you just wait i'll DM with frequently from My account
+                        I'll keep trace Who is unfollow you just wait i'll DM you frequently from My account
 
 
                         <a href="https://twitter.com/_Blue_Helper_?ref_src=twsrc%5Etfw" class="twitter-follow-button"
