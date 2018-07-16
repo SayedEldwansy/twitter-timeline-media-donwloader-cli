@@ -9,7 +9,7 @@
                             This tweet will will tweet with my account @_Blue_Helper_ :
                     </span>
                     <br>
-                    <textarea name="message" v-model="tweet_string" class="form-control"></textarea>
+                    <textarea maxlength="255" name="message" v-model="tweet_string" class="form-control"></textarea>
                     <br>
                     <button :disabled="tweet_string.length <= 0" @click="tweet" type="submit"
                             class="btn btn-primary float-right">
@@ -34,12 +34,14 @@
         methods: {
             tweet() {
                 axios.post('api/tweet-by-me', {tweet_string: this.tweet_string}).then(response => {
+                    console.log(response);
                     this.$notify({
                         group: 'notify',
                         title: '',
                         text: "Done",
                         type: 'success',
                     });
+                    this.tweet_string = '';
                 });
             }
         },

@@ -49098,12 +49098,14 @@ Vue.use(__WEBPACK_IMPORTED_MODULE_0_vue_notification___default.a);
             var _this = this;
 
             axios.post('api/tweet-by-me', { tweet_string: this.tweet_string }).then(function (response) {
+                console.log(response);
                 _this.$notify({
                     group: 'notify',
                     title: '',
                     text: "Done",
                     type: 'success'
                 });
+                _this.tweet_string = '';
             });
         }
     }
@@ -49143,7 +49145,7 @@ var render = function() {
               }
             ],
             staticClass: "form-control",
-            attrs: { name: "message" },
+            attrs: { maxlength: "255", name: "message" },
             domProps: { value: _vm.tweet_string },
             on: {
               input: function($event) {
