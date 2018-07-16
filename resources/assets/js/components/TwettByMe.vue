@@ -40,6 +40,7 @@
                         title: '',
                         text: "Done",
                         type: 'success',
+                        duration: 50000,
                     });
                     this.tweet_string = '';
                 });

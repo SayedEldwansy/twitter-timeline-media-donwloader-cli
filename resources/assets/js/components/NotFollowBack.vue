@@ -79,6 +79,7 @@
                             title: '',
                             text: 'unfollow '+ screen_name +" success",
                             type: 'success',
+                            duration: 50000,
                         });
                     }
                 });
