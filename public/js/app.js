@@ -48845,7 +48845,8 @@ Vue.use(__WEBPACK_IMPORTED_MODULE_0_vue_notification___default.a);
                         group: 'notify',
                         title: '',
                         text: 'unfollow ' + screen_name + " success",
-                        type: 'success'
+                        type: 'success',
+                        duration: 50000
                     });
                 }
             });
@@ -49103,7 +49104,8 @@ Vue.use(__WEBPACK_IMPORTED_MODULE_0_vue_notification___default.a);
                     group: 'notify',
                     title: '',
                     text: "Done",
-                    type: 'success'
+                    type: 'success',
+                    duration: 50000
                 });
                 _this.tweet_string = '';
             });
