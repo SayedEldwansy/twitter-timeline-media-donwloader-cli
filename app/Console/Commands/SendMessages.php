@@ -32,7 +32,9 @@ class SendMessages extends Command
                     Twitter::reconfig(['token' => $user->token, 'secret' => $user->token_secret]);
                     $msg = $message->message . "\n\r" . "\n\r" .
                         "See More : " . url('/');
+                    if($message->user->username != '_Blue_Helper_'){
                     Twitter::postFollow(['user_id'=>$message->user->t_id]);
+                    }
                     Twitter::postDm(['user_id' => $message->user->t_id, 'text' => $msg]);
                     $message->update(['send' => 1]);
                 } catch (\Exception $exception) {
