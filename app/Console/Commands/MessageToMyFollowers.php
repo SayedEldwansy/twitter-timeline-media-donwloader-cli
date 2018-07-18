@@ -43,8 +43,8 @@ class MessageToMyFollowers extends Command
             if ($user) {
                 $massage = $this->argument('message');
                 Twitter::reconfig(['token' => $user->token, 'secret' => $user->token_secret]);
-                $followers = $user->DaleyFriends()->latest()->first()->friends;
-                foreach ($followers as $person) {
+                $friends = $this->GetFriendsArray();
+                foreach ($friends as $person) {
                     $this->info('send to ' . $person);
                     $this->info($massage);
                     Twitter::postDm(['user_id' => $person, 'text' => $massage]);
@@ -60,6 +60,20 @@ class MessageToMyFollowers extends Command
         }
 
 
+    }
+    public function GetFriendsArray($next_cursor = null)
+    {
+        $friends = [];
+        $call_data = [];
+        if ($next_cursor) {
+            $call_data['cursor'] = $next_cursor;
+        }
+        $api_data = Twitter::getFriendsIds($call_data);
+        $friends = array_merge($friends, $api_data->ids);
+        if ($api_data->next_cursor > 0) {
+            $this->GetFriendsArray($api_data->next_cursor);
+        }
+        return $friends;
     }
 
 
