@@ -21,6 +21,7 @@ Route::get('settings','SettingsController@index')->name('settings')->middleware(
 Route::get('welcome-message','WelcomeMessageController@index');
 Route::post('welcome-message','WelcomeMessageController@store');
 Route::get('not-follow-back','NotFollowBackController@index');
+Route::get('anonymous-tweet','HomeController@tweetByMe');
 
 
 

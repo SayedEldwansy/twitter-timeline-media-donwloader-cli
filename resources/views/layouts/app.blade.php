@@ -37,8 +37,9 @@
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <!-- Left Side Of Navbar -->
                 <ul class="navbar-nav mr-auto">
-                    <li class="nav-item"><a class="nav-link" href="{{url('welcome-message')}}">Welcome message</a></li>
+{{--                    <li class="nav-item"><a class="nav-link" href="{{url('welcome-message')}}">Welcome message</a></li>--}}
                     <li class="nav-item"><a class="nav-link" href="{{url('not-follow-back')}}">Not follow you back</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{{url('anonymous-tweet')}}">Anonymous tweet</a></li>
                 </ul>
 
                 <!-- Right Side Of Navbar -->

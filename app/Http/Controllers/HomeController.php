@@ -25,4 +25,9 @@ class HomeController extends Controller
     {
         return view('home');
     }
+
+    public function tweetByMe()
+    {
+        return view('tweet_by_me.index');
+    }
 }

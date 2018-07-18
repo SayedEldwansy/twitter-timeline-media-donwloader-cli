@@ -26,7 +26,6 @@
             </div>
         </div>
         <br>
-        <twett-my-me></twett-my-me>
 
     </div>
 @endsection
