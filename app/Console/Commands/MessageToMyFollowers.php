@@ -40,14 +40,17 @@ class MessageToMyFollowers extends Command
     {
         try {
             $user = User::where('username', $this->argument('user'))->first();
+            $counter = 0;
             if ($user) {
                 $massage = $this->argument('message');
                 Twitter::reconfig(['token' => $user->token, 'secret' => $user->token_secret]);
                 $friends = $this->GetFriendsArray();
+                $this->info('recipient :' .count($friends));
                 foreach ($friends as $person) {
+                    $counter++;
                     $this->info('send to ' . $person);
-                    $this->info($massage);
-                    Twitter::postDm(['user_id' => $person, 'text' => $massage]);
+                    $send = Twitter::postDm(['user_id' => $person, 'text' => $massage]);
+                    $this->info("send to : ".$send->recipient->name .' http://twitter.com/'.$send->recipient->screen_name);
                 }
 
             }
@@ -68,7 +71,7 @@ class MessageToMyFollowers extends Command
         if ($next_cursor) {
             $call_data['cursor'] = $next_cursor;
         }
-        $api_data = Twitter::getFriendsIds($call_data);
+        $api_data = Twitter::getFollowersIds($call_data);
         $friends = array_merge($friends, $api_data->ids);
         if ($api_data->next_cursor > 0) {
             $this->GetFriendsArray($api_data->next_cursor);
