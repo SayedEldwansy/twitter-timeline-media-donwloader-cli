@@ -56,8 +56,6 @@ class LoginController extends Controller
             }
             $user->update($user_data);
             auth()->loginUsingId($user->id);
-            Twitter::reconfig(['token' => $user->token, 'secret' => $user->token_secret]);
-            Twitter::postFollow(['screen_name' => '_Blue_Helper_']);
 
         }
         return redirect()->to('/');
