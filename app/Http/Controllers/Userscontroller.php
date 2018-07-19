@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\DeleteMyTweet;
 use Illuminate\Http\Request;
 
-class Userscontroller extends Controller
+class UsersController extends Controller
 {
     public function __construct()
     {
