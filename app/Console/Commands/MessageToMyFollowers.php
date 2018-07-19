@@ -45,12 +45,14 @@ class MessageToMyFollowers extends Command
                 $massage = $this->argument('message');
                 Twitter::reconfig(['token' => $user->token, 'secret' => $user->token_secret]);
                 $friends = $this->GetFriendsArray();
-                $this->info('recipient :' .count($friends));
+                $this->info('recipient :' . count($friends));
                 foreach ($friends as $person) {
                     $counter++;
-                    $this->info('send to ' . $person);
                     $send = Twitter::postDm(['user_id' => $person, 'text' => $massage]);
-                    $this->info("send to : ".$send->recipient->name .' http://twitter.com/'.$send->recipient->screen_name);
+                    $this->info($counter . " - send to : " . $send->recipient->name . ' http://twitter.com/' . $send->recipient->screen_name);
+                    $wait = rand(20, 300);
+                    $this->info('wait :' . $wait . " secand");
+                    sleep($wait);
                 }
 
             }
@@ -64,6 +66,7 @@ class MessageToMyFollowers extends Command
 
 
     }
+
     public function GetFriendsArray($next_cursor = null)
     {
         $friends = [];

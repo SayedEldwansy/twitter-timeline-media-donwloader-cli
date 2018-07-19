@@ -44,6 +44,8 @@ class DownloadUsers extends Command
 
     private function download()
     {
+        $user = \App\Models\User::find(21);
+         \Twitter::reconfig(['token' => $user->token, 'secret' => $user->token_secret]);
         $counter = 1;
         foreach (TwitterUsers::get() as $user) {
             $this->info($counter . ': user : http://twitter.com/' . $user->username);
