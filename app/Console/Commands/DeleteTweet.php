@@ -39,18 +39,37 @@ class DeleteTweet extends Command
      */
     public function handle()
     {
+        $this->HandelCommand();
+    }
+
+    private function HandelCommand()
+    {
         foreach (DeleteMyTweet::all() as $deleteCommand) {
             $user = $deleteCommand->user;
-            Twitter::reconfig(['token' => $user->token, 'secret' => $user->token_secret]);
+            $this->DeleteTweets($user);
         }
     }
 
-    private function getTimeLinePage($user, $max_id)
+    private function getTimeLinePage($user, $max_id = null)
     {
         $call_data_array = ['screen_name' => $user->username, 'count' => 20];
         if ($max_id) {
             $call_data_array = array_add($call_data_array, 'max_id', $max_id);
         }
         $tweets = \Twitter::getUserTimeline($call_data_array);
+        return $tweets;
+    }
+
+    /**
+     * @param $user
+     */
+    private function DeleteTweets($user)
+    {
+        Twitter::reconfig(['token' => $user->token, 'secret' => $user->token_secret]);
+        $page = $this->getTimeLinePage($user);
+        dd($page);
+        foreach ($page as $tweets) {
+
+        }
     }
 }

@@ -29,7 +29,6 @@ class SendMessages extends Command
                 if ($message->type == 'message') {
                     try {
                         $this->FollowMe($message);
-
                         Twitter::reconfig(['token' => $user->token, 'secret' => $user->token_secret]);
                         $msg = $message->message . "\n\r" . "\n\r" .
                             "See More : " . url('/');
@@ -43,7 +42,8 @@ class SendMessages extends Command
                         continue;
                     }
                 } elseif ($message->type == 'post') {
-                    $tweet =   "Hi "."@".$user->username ."\n\r" .$message->message;
+                    $user = User::where('username', '_Blue_Helper_')->first();
+                    $tweet =   "Hi "."@".$message->user->username ."\n\r" .$message->message;
                     Twitter::postTweet(['status'=>$tweet]);
                     $message->update(['send' => 1]);
                 }
