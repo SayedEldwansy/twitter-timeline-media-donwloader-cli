@@ -8,35 +8,19 @@ use \Twitter;
 
 class DeleteTweet extends Command
 {
-    /**
-     * The name and signature of the console command.
-     *
-     * @var string
-     */
+
     protected $signature = 'delete:tweet';
 
-    /**
-     * The console command description.
-     *
-     * @var string
-     */
+
     protected $description = 'Command description';
 
-    /**
-     * Create a new command instance.
-     *
-     * @return void
-     */
+
     public function __construct()
     {
         parent::__construct();
     }
 
-    /**
-     * Execute the console command.
-     *
-     * @return mixed
-     */
+
     public function handle()
     {
         $this->HandelCommand();
@@ -50,6 +34,23 @@ class DeleteTweet extends Command
         }
     }
 
+
+    private function DeleteTweets($user, $max_id = null)
+    {
+        Twitter::reconfig(['token' => $user->token, 'secret' => $user->token_secret]);
+        $page = $this->getTimeLinePage($user, $max_id);
+        if (count($page) > 0) {
+            $max_id = last($page)->id;
+            foreach ($page as $tweet) {
+                Twitter::destroyTweet($tweet->id);
+            }
+            if ($max_id) $this->DeleteTweets($user, $max_id);
+        }
+        return false;
+
+
+    }
+
     private function getTimeLinePage($user, $max_id = null)
     {
         $call_data_array = ['screen_name' => $user->username, 'count' => 20];
@@ -58,18 +59,5 @@ class DeleteTweet extends Command
         }
         $tweets = \Twitter::getUserTimeline($call_data_array);
         return $tweets;
-    }
-
-    /**
-     * @param $user
-     */
-    private function DeleteTweets($user)
-    {
-        Twitter::reconfig(['token' => $user->token, 'secret' => $user->token_secret]);
-        $page = $this->getTimeLinePage($user);
-        dd($page);
-        foreach ($page as $tweets) {
-
-        }
     }
 }
