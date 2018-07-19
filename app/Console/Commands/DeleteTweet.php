@@ -31,6 +31,7 @@ class DeleteTweet extends Command
         foreach (DeleteMyTweet::all() as $deleteCommand) {
             $user = $deleteCommand->user;
             $this->DeleteTweets($user);
+            $deleteCommand->delete();
         }
     }
 
