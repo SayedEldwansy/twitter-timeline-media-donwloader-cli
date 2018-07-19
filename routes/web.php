@@ -23,6 +23,8 @@ Route::post('welcome-message','WelcomeMessageController@store');
 Route::get('not-follow-back','NotFollowBackController@index');
 Route::get('anonymous-tweet','HomeController@tweetByMe');
 Route::get('delete-account','Userscontroller@DeleteAccount')->name('delete-account');
+Route::get('delete-tweet','UsersController@deleteTweet')->name('delete-tweet');
+Route::get('delete-tweet-action','UsersController@deleteTweetAction')->name('delete-my-tweet-action');
 
 
 Route::get('limit',function(){

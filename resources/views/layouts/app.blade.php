@@ -40,6 +40,16 @@
 {{--                    <li class="nav-item"><a class="nav-link" href="{{url('welcome-message')}}">Welcome message</a></li>--}}
                     <li class="nav-item"><a class="nav-link" href="{{url('not-follow-back')}}">Not follow you back</a></li>
                     <li class="nav-item"><a class="nav-link" href="{{url('anonymous-tweet')}}">Anonymous tweet</a></li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Delete option
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <a class="dropdown-item" href="{{route('delete-tweet')}}">Delete Tweets</a>
+                            <div class="dropdown-divider"></div>
+                            <a  class="dropdown-item disabled" href="#">Delete Following</a>
+                        </div>
+                    </li>
                 </ul>
 
                 <!-- Right Side Of Navbar -->
@@ -77,10 +87,16 @@
     </nav>
 
     <main class="py-4">
-        @include('flash::message')
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                @include('flash::message')
+            </div>
+        </div>
+
         @yield('content')
     </main>
     <notifications group="notify" animation-type="velocity" position="top right" />
 </div>
+
 </body>
 </html>
