@@ -26,6 +26,8 @@ Route::get('delete-account','Userscontroller@DeleteAccount')->name('delete-accou
 Route::get('delete-tweet','UsersController@deleteTweet')->name('delete-tweet');
 Route::get('delete-tweet-action','UsersController@deleteTweetAction')->name('delete-my-tweet-action');
 
+Route::get('delete-following','UsersController@deleteFollowing')->name('delete-following');
+Route::get('delete-following-action','UsersController@deleteFollowingAction')->name('delete-following-action');
 
 Route::get('limit',function(){
 

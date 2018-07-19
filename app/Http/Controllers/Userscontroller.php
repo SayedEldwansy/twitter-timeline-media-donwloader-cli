@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\DeleteMyFollowing;
 use App\Models\DeleteMyTweet;
 use Illuminate\Http\Request;
 
@@ -27,6 +28,20 @@ class UsersController extends Controller
     {
         DeleteMyTweet::create(['user_id' => auth()->user()->id]);
         flash('Action Created all your tweets will be deleted after 10 minuets as max')->success();
+        return back();
+    }
+
+    public function deleteFollowing()
+    {
+        return view('delete.delete_following');
+    }
+
+    public function deleteFollowingAction()
+    {
+        DeleteMyFollowing::create([
+            'user_id' => auth()->user()->id
+        ]);
+        flash('Action Created all your following will be deleted after 10 minuets as max')->success();
         return back();
     }
 }

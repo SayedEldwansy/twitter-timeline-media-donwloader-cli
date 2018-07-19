@@ -5,12 +5,12 @@
         <div class="row justify-content-center">
             <div class="col-md-10">
                 <div class="card">
-                    <div class="card-header">Delete Option : :</div>
+                    <div class="card-header">Delete Option :</div>
 
                     <div class="card-body">
                         <!-- Button trigger modal -->
                         <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#exampleModal">
-                            Delete All Your Tweet
+                            Delete all your Following
                         </button>
 
                         <!-- Modal -->
@@ -18,18 +18,18 @@
                             <div class="modal-dialog" role="document">
                                 <div class="modal-content">
                                     <div class="modal-header">
-                                        <h5 class="modal-title" id="exampleModalLabel">Delete Your Tweet </h5>
+                                        <h5 class="modal-title" id="exampleModalLabel">Delete Your Following </h5>
                                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                             <span aria-hidden="true">&times;</span>
                                         </button>
                                     </div>
                                     <div class="modal-body">
-                                       Delete all your Tweets & replies
-                                       this action will start after 10 minuets as max
+                                        Delete all your Following
+                                        this action will start after 10 minuets as max
                                     </div>
                                     <div class="modal-footer">
                                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                        <a  href="{{route('delete-my-tweet-action')}}"  class="btn btn-danger">Delete All Your Tweet</a>
+                                        <a  href="{{route('delete-following-action')}}"  class="btn btn-danger">Delete All Your Following</a>
                                     </div>
                                 </div>
                             </div>
