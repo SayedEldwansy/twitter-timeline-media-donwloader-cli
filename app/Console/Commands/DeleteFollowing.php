@@ -50,7 +50,7 @@ class DeleteFollowing extends Command
             $friends = $this->GetFriendsArray();
             foreach ($friends as $friend) {
                 Twitter::postUnfollow(['user_id' => $friend]);
-                $wait = rand(1, 60);
+                $wait = rand(1, 10);
                 $this->info('unfollow user : ' . $friend . " ->wait " . $wait);
                 sleep($wait);
             }
