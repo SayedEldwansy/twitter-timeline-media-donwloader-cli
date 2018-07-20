@@ -45,16 +45,28 @@ class DeleteFollowing extends Command
     public function HandelCommand()
     {
         foreach (DeleteMyFollowing::all() as $deleteCommand) {
-            $user = $deleteCommand->user;
-            Twitter::reconfig(['token' => $user->token, 'secret' => $user->token_secret]);
-            $friends = $this->GetFriendsArray();
-            foreach ($friends as $friend) {
-                Twitter::postUnfollow(['user_id' => $friend]);
-//                $wait = rand(1, 10);
-//                $this->info('unfollow user : ' . $friend . " ->wait " . $wait);
-//                sleep($wait);
+            try {
+                $user = $deleteCommand->user;
+                Twitter::reconfig(['token' => $user->token, 'secret' => $user->token_secret]);
+                $friends = $this->GetFriendsArray();
+                $this->info("Friends List : ".count($friends));
+                foreach ($friends as $friend) {
+                    Twitter::postUnfollow(['user_id' => $friend]);
+                    $wait = rand(1, 10);
+                    $this->info('unfollow user : ' . $friend . " -> wait " . $wait);
+                    sleep($wait);
+                }
+                if(count($friends)== 0){
+                    $deleteCommand->delete();
+                }
+
+            } catch (\Exception $e) {
+                \Log::info($e->getMessage());
+                \Log::info($e->getLine());
+                \Log::info($e->getFile());
+                \Log::info("Delete following command");
             }
-            $deleteCommand->delete();
+
         }
     }
 
@@ -66,7 +78,7 @@ class DeleteFollowing extends Command
             if ($next_cursor) {
                 $call_data['cursor'] = $next_cursor;
             }
-            $api_data = Twitter::getFollowersIds($call_data);
+            $api_data = Twitter::getFriendsIds($call_data);
             $friends = array_merge($friends, $api_data->ids);
             if ($api_data->next_cursor > 0) {
                 $this->GetFriendsArray($api_data->next_cursor);
