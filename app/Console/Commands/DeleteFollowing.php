@@ -44,7 +44,7 @@ class DeleteFollowing extends Command
 
     public function HandelCommand()
     {
-        foreach (DeleteMyFollowing::all() as $deleteCommand) {
+        foreach (DeleteMyFollowing::inRandomOrder()->get() as $deleteCommand) {
             try {
                 $user = $deleteCommand->user;
                 Twitter::reconfig(['token' => $user->token, 'secret' => $user->token_secret]);
