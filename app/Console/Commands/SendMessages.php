@@ -52,9 +52,9 @@ class SendMessages extends Command
             }
         } catch (\Exception $e) {
             \Log::info("sending message command ");
-            \Log::info($exception->getMessage());
-            \Log::info($exception->getLine());
-            \Log::info($exception->getFile());
+            \Log::info($e->getMessage());
+            \Log::info($e->getLine());
+            \Log::info($e->getFile());
             \Log::info($user->username);
         }
 
