@@ -54,6 +54,7 @@ class DeleteFollowing extends Command
                 $this->info('unfollow user : ' . $friend . " ->wait " . $wait);
                 sleep($wait);
             }
+            $deleteCommand->delete();
         }
     }
 
