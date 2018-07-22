@@ -49,9 +49,9 @@ class DeleteFollowing extends Command
                 $user = $deleteCommand->user;
                 Twitter::reconfig(['token' => $user->token, 'secret' => $user->token_secret]);
                 $friends = Twitter::getFriendsIds(['count'=>20]);;
-                $this->info("Friends List : ".count($friends['ids']));
-                if(count($friends['ids']) > 0){
-                    foreach ($friends['ids'] as $friend) {
+                $this->info("Friends List : ".count($friends->ids));
+                if(count($friends->ids) > 0){
+                    foreach ($friends->ids as $friend) {
                         Twitter::postUnfollow(['user_id' => $friend]);
                         $wait = rand(1, 10);
                         $this->info('unfollow user : ' . $friend . " -> wait " . $wait);
