@@ -24,7 +24,8 @@
                                         </button>
                                     </div>
                                     <div class="modal-body">
-                                        Delete all your Likes
+                                        Delete all your Likes <br>
+                                        we will delete 20 like every 5 minuets so it may take some time <br>
                                         this action will start after 10 minuets as max
                                     </div>
                                     <div class="modal-footer">
