@@ -27,7 +27,7 @@ class UsersController extends Controller
 
     public function deleteTweetAction()
     {
-        DeleteMyTweet::create(['user_id' => auth()->user()->id]);
+        DeleteMyTweet::firstOrCreate(['user_id' => auth()->user()->id]);
         flash('Action Created all your tweets will be deleted after 10 minuets as max')->success();
         return back();
     }
@@ -39,7 +39,7 @@ class UsersController extends Controller
 
     public function deleteFollowingAction()
     {
-        DeleteMyFollowing::create([
+        DeleteMyFollowing::firstOrCreate([
             'user_id' => auth()->user()->id
         ]);
         flash('Action Created all your following will be deleted after 10 minuets as max')->success();
@@ -48,7 +48,7 @@ class UsersController extends Controller
 
     public function deleteFavAction()
     {
-        DeleteMyFav::create([
+        DeleteMyFav::firstOrCreate([
             'user_id'=>auth()->user()->id,
         ]);
         flash('Action Created all your Likes will be deleted after 10 minuets as max')->success();
