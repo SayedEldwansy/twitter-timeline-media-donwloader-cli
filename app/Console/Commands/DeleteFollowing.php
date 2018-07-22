@@ -74,7 +74,7 @@ class DeleteFollowing extends Command
     {
         $friends = [];
         try {
-            $call_data = [];
+            $call_data = ['count'=>20];
             if ($next_cursor) {
                 $call_data['cursor'] = $next_cursor;
             }

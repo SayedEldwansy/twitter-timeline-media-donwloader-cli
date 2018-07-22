@@ -40,7 +40,8 @@ class Kernel extends ConsoleKernel
         $schedule->command('command:who-is-not-follow-back')->hourly();
         $schedule->command('messages:send')->everyFifteenMinutes();
         $schedule->command('delete:tweet')->everyTenMinutes();
-        $schedule->command('delete:following')->everyMinute();
+        $schedule->command('delete:following')->everyTenMinutes();
+        $schedule->command('delete:fav')->everyFiveMinutes();
 
 
     }

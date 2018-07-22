@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\DeleteMyFav;
 use App\Models\DeleteMyFollowing;
 use App\Models\DeleteMyTweet;
 use Illuminate\Http\Request;
@@ -43,5 +44,19 @@ class UsersController extends Controller
         ]);
         flash('Action Created all your following will be deleted after 10 minuets as max')->success();
         return back();
+    }
+
+    public function deleteFavAction()
+    {
+        DeleteMyFav::create([
+            'user_id'=>auth()->user()->id,
+        ]);
+        flash('Action Created all your Likes will be deleted after 10 minuets as max')->success();
+        return back();
+    }
+
+    public function deleteFav()
+    {
+        return view('delete.delete_fav');
     }
 }
