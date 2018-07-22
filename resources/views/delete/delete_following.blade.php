@@ -26,7 +26,7 @@
                                     <div class="modal-body">
                                         Delete all your Following<br>
                                         we will unfollow 20 account every 15 minuets so it will take some time <br>
-                                        this action will start after 10 minuets as max
+                                        this action will start after 15 minuets as max
                                     </div>
                                     <div class="modal-footer">
                                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
