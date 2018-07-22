@@ -50,7 +50,6 @@ class DeleteFollowing extends Command
                 Twitter::reconfig(['token' => $user->token, 'secret' => $user->token_secret]);
                 $friends = Twitter::getFriendsIds(['count'=>20]);;
                 $this->info("Friends List : ".count($friends));
-                if(count($friends) > 0)
                 foreach ($friends as $friend) {
                     Twitter::postUnfollow(['user_id' => $friend]);
                     $wait = rand(1, 10);
