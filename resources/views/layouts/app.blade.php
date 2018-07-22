@@ -48,7 +48,8 @@
                             <a class="dropdown-item" href="{{route('delete-tweet')}}">Delete Tweets</a>
                             <div class="dropdown-divider"></div>
                             <a class="dropdown-item" href="{{route('delete-fav')}}">Delete Likes</a>
-{{--                            <a  class="dropdown-item " href="{{route('delete-following')}}">Delete Following</a>--}}
+                            <div class="dropdown-divider"></div>
+                            <a  class="dropdown-item " href="{{route('delete-following')}}">Delete Following</a>
                         </div>
                     </li>
                 </ul>

@@ -48,15 +48,16 @@ class DeleteFollowing extends Command
             try {
                 $user = $deleteCommand->user;
                 Twitter::reconfig(['token' => $user->token, 'secret' => $user->token_secret]);
-                $friends = $this->GetFriendsArray();
+                $friends = Twitter::getFriendsIds(['count'=>20]);;
                 $this->info("Friends List : ".count($friends));
+                if(count($friends) > 0)
                 foreach ($friends as $friend) {
                     Twitter::postUnfollow(['user_id' => $friend]);
                     $wait = rand(1, 10);
                     $this->info('unfollow user : ' . $friend . " -> wait " . $wait);
                     sleep($wait);
                 }
-                if(count($friends)== 0){
+                if(count($friends) == 0){
                     $deleteCommand->delete();
                 }
 
@@ -70,23 +71,5 @@ class DeleteFollowing extends Command
         }
     }
 
-    public function GetFriendsArray($next_cursor = null)
-    {
-        $friends = [];
-        try {
-            $call_data = ['count'=>20];
-            if ($next_cursor) {
-                $call_data['cursor'] = $next_cursor;
-            }
-            $api_data = Twitter::getFriendsIds($call_data);
-            $friends = array_merge($friends, $api_data->ids);
-            if ($api_data->next_cursor > 0) {
-                $this->GetFriendsArray($api_data->next_cursor);
-            }
-        } catch (\Exception $e) {
-            \Log::info($e->getMessage());
-        }
 
-        return $friends;
-    }
 }
