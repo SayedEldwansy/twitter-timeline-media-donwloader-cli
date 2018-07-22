@@ -57,7 +57,7 @@ class DeleteFollowing extends Command
                     $this->info('unfollow user : ' . $friend . " -> wait " . $wait);
                     sleep($wait);
                 }
-                if(count($friends) == 0){
+                if(!$friends){
                     $deleteCommand->delete();
                 }
 

@@ -47,7 +47,7 @@ class DeleteFav extends Command
             $user = $command->user;
             Twitter::reconfig(['token' => $user->token, 'secret' => $user->token_secret]);
             $fav = Twitter::getFavorites();
-            if(count($fav) > 0){
+            if($fav && count($fav) > 0){
                 foreach ($fav as $item){
                     Twitter::destroyFavorite(['id'=>$item->id]);
                 }
